@@ -10,7 +10,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="習慣">
   <meta name="theme-color" content="#0f0f0f">
-  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f0f0f'/%3E%3Ccircle cx='50' cy='50' r='26' fill='%23e8e8e8'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f0f0f'/%3E%3Ccircle cx='50' cy='50' r='26' fill='%23e8e8e8'/%3E%3C/svg%3E">
 
   <title>習慣トラッカー</title>
 
@@ -23,7 +24,7 @@
     input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(0.5) sepia(1) saturate(0)}
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-    input[type="number"]{-moz-appearance:textfield}
+    input[type="number"]{appearance:textfield;-moz-appearance:textfield}
     ::-webkit-scrollbar{width:3px}
     ::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
   </style>
@@ -45,10 +46,10 @@
   const m={
     name:"習慣トラッカー",short_name:"習慣",start_url:"./",
     display:"standalone",background_color:"#0f0f0f",theme_color:"#0f0f0f",
-    icons:[{
-      src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f0f0f'/%3E%3Ctext y='78' x='50' font-size='72' text-anchor='middle'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E",
-      sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"
-    }]
+    icons:[
+      {src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f0f0f'/%3E%3Ccircle cx='50' cy='50' r='26' fill='%23e8e8e8'/%3E%3C/svg%3E",sizes:"512x512",type:"image/svg+xml",purpose:"any maskable"},
+      {src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f0f0f'/%3E%3Ccircle cx='50' cy='50' r='26' fill='%23e8e8e8'/%3E%3C/svg%3E",sizes:"192x192",type:"image/svg+xml",purpose:"any maskable"}
+    ]
   };
   const b=new Blob([JSON.stringify(m)],{type:"application/manifest+json"});
   const l=document.createElement("link");
@@ -79,27 +80,26 @@ const storage = {
 // ── SVG アイコン（lucide-react の代替）────────────────────────────────────
 const Ic = ({ size=24, color="currentColor", children }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
-    stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
     {children}
   </svg>
 );
-const Home        = ({size,color}) => <Ic size={size} color={color}><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></Ic>;
-const Calendar    = ({size,color}) => <Ic size={size} color={color}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></Ic>;
-const BarChart2   = ({size,color}) => <Ic size={size} color={color}><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></Ic>;
-const Flame       = ({size,color}) => <Ic size={size} color={color}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></Ic>;
+const Home        = ({size,color}) => <Ic size={size} color={color}><path d="M4 11.5L12 4l8 7.5v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8Z"/><path d="M9 22V13h6v9"/></Ic>;
+const Calendar    = ({size,color}) => <Ic size={size} color={color}><rect x="3.5" y="4" width="17" height="17" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/></Ic>;
+const BarChart2   = ({size,color}) => <Ic size={size} color={color}><line x1="6" y1="18" x2="6" y2="11"/><line x1="12" y1="18" x2="12" y2="7"/><line x1="18" y1="18" x2="18" y2="14"/></Ic>;
+const Flame       = ({size,color}) => <Ic size={size} color={color}><path d="M12 3.5C8.5 8.5 8.5 12.5 11 16c1.5 2.5 1.5 3.5 1.5 3.5s1-1 2-2.5c1.5-2 2-4 1-6-1-2-1.5-3-2-4.5Z"/><path d="M12 3.5C14 7 13.5 9.5 12.5 12c-1 2.5-.5 3.5-.5 3.5"/></Ic>;
 const ChevronLeft = ({size,color}) => <Ic size={size} color={color}><polyline points="15 18 9 12 15 6"/></Ic>;
 const ChevronRight= ({size,color}) => <Ic size={size} color={color}><polyline points="9 18 15 12 9 6"/></Ic>;
-const Clock       = ({size,color}) => <Ic size={size} color={color}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></Ic>;
-const Smartphone  = ({size,color}) => <Ic size={size} color={color}><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></Ic>;
-const Droplets    = ({size,color}) => <Ic size={size} color={color}><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></Ic>;
-const Shield      = ({size,color}) => <Ic size={size} color={color}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></Ic>;
-const Sun         = ({size,color}) => <Ic size={size} color={color}><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></Ic>;
-const Zap         = ({size,color}) => <Ic size={size} color={color}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></Ic>;
-const CheckCircle = ({size,color}) => <Ic size={size} color={color}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></Ic>;
-const Circle      = ({size,color}) => <Ic size={size} color={color}><circle cx="12" cy="12" r="10"/></Ic>;
+const Clock       = ({size,color}) => <Ic size={size} color={color}><circle cx="12" cy="12" r="9"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="12" y1="12" x2="15" y2="14"/></Ic>;
+const Smartphone  = ({size,color}) => <Ic size={size} color={color}><rect x="7" y="3" width="10" height="18" rx="2"/><circle cx="12" cy="18" r="1"/></Ic>;
+const Droplets    = ({size,color}) => <Ic size={size} color={color}><path d="M12 3.5c-2.7 3.7-3.7 6.5-3.7 8.8a3.7 3.7 0 0 0 7.4 0c0-2.3-1-5.1-3.7-8.8Z"/></Ic>;
+const Shield      = ({size,color}) => <Ic size={size} color={color}><path d="M12 3 5 6v5c0 5.5 3.7 9.6 7 10 3.3-.4 7-4.5 7-10V6L12 3Z"/></Ic>;
+const Sun         = ({size,color}) => <Ic size={size} color={color}><circle cx="12" cy="12" r="4"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/></Ic>;
+const Zap         = ({size,color}) => <Ic size={size} color={color}><polyline points="13 2 3 14 11 14 11 22 21 10 13 10 13 2"/></Ic>;
+const CheckCircle = ({size,color}) => <Ic size={size} color={color}><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2 2 5-5"/></Ic>;
+const Circle      = ({size,color}) => <Ic size={size} color={color}><circle cx="12" cy="12" r="9"/></Ic>;
 
 // ── 定数 ──────────────────────────────────────────────────────────────────
-const TODAY = new Date().toISOString().split("T")[0];
 const A  = "#C42B2E";
 const BG = "#0f0f0f";
 const C1 = "#161616";
@@ -111,7 +111,8 @@ const T2 = "#9a9a9a";
 
 const EMPTY = {
   wakeTime:"", bedTime:"", sleepH:"", sleepM:"", sleepManual:false,
-  coldShower:false, noPorn:false, morningText:"", morningMin:"",
+  coldShower:false, noPorn:false, noBathPhone:false, journaling:false, readingStudy:false,
+  morningText:"", morningMin:"",
   phoneH:"", phoneM:"",
 };
 
@@ -140,13 +141,16 @@ function getPrevDateKey(dateStr) {
   d.setDate(d.getDate()-1);
   return d.toISOString().split("T")[0];
 }
+function getTodayKey() {
+  return new Date().toISOString().split("T")[0];
+}
 
 // 表示用: 前日の就寝時刻 + 当日の起床時刻 を優先して睡眠時間を計算する
 function sleepMinsForDisplay(day, allData, keyForDay) {
   if (!day) return null;
   if (day.sleepManual && day.sleepH !== "")
     return (parseInt(day.sleepH)||0)*60 + (parseInt(day.sleepM)||0);
-  const key = keyForDay || TODAY;
+  const key = keyForDay || getTodayKey();
   const prevKey = getPrevDateKey(key);
   const prev = allData ? allData[prevKey] : null;
   if (prev && prev.bedTime && day.wakeTime) {
@@ -170,7 +174,7 @@ function wakeMins(day) {
 function score(day) {
   if (!day) return 0;
   return [!!day.wakeTime, sleepMins(day)!==null, !!day.coldShower,
-          !!day.noPorn, !!day.morningText, phoneMins(day)!==null].filter(Boolean).length;
+          !!day.noPorn, !!day.noBathPhone, !!day.morningText, phoneMins(day)!==null].filter(Boolean).length;
 }
 function calcStreak(allData) {
   let s = 0;
@@ -220,8 +224,8 @@ function Card({ children, style={} }) {
 }
 function IconBox({ active, children }) {
   return (
-    <div style={{background:active?"#200a0a":"#1a1a1a", borderRadius:10, padding:8,
-      border:`1px solid ${active ? A+"55" : BD}`, transition:"all 0.25s", flexShrink:0}}>
+    <div style={{background:active?"#2c2c2c":"#161616", borderRadius:10, padding:8,
+      border:`1px solid ${active ? "#5a5a5a" : BD}`, transition:"all 0.25s", flexShrink:0}}>
       {children}
     </div>
   );
@@ -247,6 +251,23 @@ function CheckRow({ icon, label, sub, checked, onToggle }) {
     </div>
   );
 }
+function ToggleAction({ icon, label, sub, active, onToggle }) {
+  return (
+    <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+      <div style={{display:"flex", alignItems:"center", gap:12}}>
+        <IconBox active={active}>{icon}</IconBox>
+        <div>
+          <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>{label}</p>
+          <p style={{fontSize:11, color:MU, margin:0}}>{sub}</p>
+        </div>
+      </div>
+      <button onClick={onToggle}
+        style={{...navBtnStyle, padding:"8px 12px"}}>
+        {active ? "✓ 保存" : "✗ 未"}
+      </button>
+    </div>
+  );
+}
 function SectionLabel({ children }) {
   return <p style={{fontSize:11, color:MU, margin:"0 0 10px", fontWeight:700,
     letterSpacing:1, textTransform:"uppercase"}}>{children}</p>;
@@ -266,10 +287,10 @@ function ChartTip({ active, payload, label, isWake }) {
 }
 
 // ── 今日の記録 ─────────────────────────────────────────────────────────────
-function TodayView({ today, updateToday, allData, updatePrev }) {
+function TodayView({ today, todayKey, updateToday, allData, updatePrev }) {
   const sc = score(today);
   const st = calcStreak(allData);
-  const prevKeyForToday = getPrevDateKey(TODAY);
+  const prevKeyForToday = getPrevDateKey(todayKey);
   const prevRecForToday = allData ? allData[prevKeyForToday] : null;
   const as = (!today.sleepManual && prevRecForToday && prevRecForToday.bedTime)
     ? autoSleep(today.wakeTime, prevRecForToday.bedTime)
@@ -277,7 +298,13 @@ function TodayView({ today, updateToday, allData, updatePrev }) {
   const set = (k, v) => updateToday({ ...today, [k]: v });
   const setPrev = (k, v) => {
     const base = prevRecForToday ? {...prevRecForToday} : {};
-    const upd = {...base, [k]: v};
+    let upd = {...base, [k]: v};
+    if (k === "sleepH" || k === "sleepM") {
+      const h = k === "sleepH" ? v : base.sleepH;
+      const m = k === "sleepM" ? v : base.sleepM;
+      const hasManual = (h !== "" && h != null) || (m !== "" && m != null);
+      upd = { ...upd, sleepManual: hasManual };
+    }
     if (typeof updatePrev === "function") updatePrev(upd);
   };
 
@@ -290,7 +317,7 @@ function TodayView({ today, updateToday, allData, updatePrev }) {
             <p style={{fontSize:11, color:MU, letterSpacing:2, textTransform:"uppercase", margin:0}}>
               {new Date().toLocaleDateString("ja-JP",{year:"numeric",month:"long",day:"numeric",weekday:"short"})}
             </p>
-            <h1 style={{fontSize:26, fontWeight:800, color:TX, margin:"3px 0 0", letterSpacing:-1}}>今日の記録</h1>
+            <h1 style={{fontSize:26, fontWeight:800, color:TX, margin:"3px 0 0", letterSpacing:-1}}>Today LOG</h1>
           </div>
           {st > 0 && (
             <div style={{background:"#180808", border:`1px solid ${A}55`, borderRadius:14,
@@ -403,21 +430,61 @@ function TodayView({ today, updateToday, allData, updatePrev }) {
               </div>
             </div>
 
-            <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
-              <div style={{display:"flex", alignItems:"center", gap:12}}>
-                <IconBox active={prevRecForToday && prevRecForToday.noPorn}>
-                  <Shield size={18} color={prevRecForToday && prevRecForToday.noPorn?A:MU}/>
-                </IconBox>
-                <div>
-                  <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>No Porn</p>
-                  <p style={{fontSize:11, color:MU, margin:0}}>前日の自制</p>
+            <ToggleAction
+              icon={<Shield size={18} color={prevRecForToday && prevRecForToday.noPorn?A:MU}/>} 
+              label="No Porn" sub="前日の自制"
+              active={prevRecForToday && prevRecForToday.noPorn}
+              onToggle={() => setPrev("noPorn", !(prevRecForToday&&prevRecForToday.noPorn))}
+            />
+            <ToggleAction
+              icon={<Shield size={18} color={prevRecForToday && prevRecForToday.noBathPhone?A:MU}/>} 
+              label="風呂トイレスマホ禁止" sub="前日のお風呂/トイレでスマホを使わなかった"
+              active={prevRecForToday && prevRecForToday.noBathPhone}
+              onToggle={() => setPrev("noBathPhone", !(prevRecForToday&&prevRecForToday.noBathPhone))}
+            />
+            <ToggleAction
+              icon={<Shield size={18} color={prevRecForToday && prevRecForToday.journaling?A:MU}/>} 
+              label="ジャーナリング" sub="前日に日記を書いた"
+              active={prevRecForToday && prevRecForToday.journaling}
+              onToggle={() => setPrev("journaling", !(prevRecForToday&&prevRecForToday.journaling))}
+            />
+            <ToggleAction
+              icon={<Shield size={18} color={prevRecForToday && prevRecForToday.readingStudy?A:MU}/>} 
+              label="読書・勉強" sub="前日に読書や勉強をした"
+              active={prevRecForToday && prevRecForToday.readingStudy}
+              onToggle={() => setPrev("readingStudy", !(prevRecForToday&&prevRecForToday.readingStudy))}
+            />
+
+            <div style={{borderTop:`1px solid ${BD}`, paddingTop:12, display:"grid", gap:12}}>
+              <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                <div style={{display:"flex", alignItems:"center", gap:12}}>
+                  <IconBox active={!!(prevRecForToday && prevRecForToday.bedTime)}>
+                    <Clock size={18} color={prevRecForToday && prevRecForToday.bedTime?A:MU}/>
+                  </IconBox>
+                  <div>
+                    <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>前日の就寝時間</p>
+                    <p style={{fontSize:11, color:MU, margin:0}}>前日に寝た時間を記録</p>
+                  </div>
                 </div>
+                <input type="time" value={prevRecForToday?prevRecForToday.bedTime:""}
+                  onChange={e => setPrev("bedTime", e.target.value)}
+                  style={{...inp, fontWeight:700, fontSize:15, width:120}}/>
               </div>
+
               <div>
-                <button onClick={() => setPrev("noPorn", !(prevRecForToday&&prevRecForToday.noPorn))}
-                  style={{...navBtnStyle, padding:"8px 12px"}}>
-                  {prevRecForToday && prevRecForToday.noPorn ? "✓ 保存" : "✗ 未"}
-                </button>
+                <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>前日の睡眠時間（手動入力）</p>
+                <div style={{display:"flex", gap:8, marginTop:8, alignItems:"center"}}>
+                  <input type="number" placeholder="h" min="0" max="24"
+                    value={prevRecForToday?prevRecForToday.sleepH:""}
+                    onChange={e => setPrev("sleepH", e.target.value)}
+                    style={{...inp, width:80, textAlign:"center"}}/>
+                  <span style={{color:MU}}>時間</span>
+                  <input type="number" placeholder="m" min="0" max="59"
+                    value={prevRecForToday?prevRecForToday.sleepM:""}
+                    onChange={e => setPrev("sleepM", e.target.value)}
+                    style={{...inp, width:80, textAlign:"center"}}/>
+                  <span style={{color:MU}}>分</span>
+                </div>
               </div>
             </div>
           </div>
@@ -428,11 +495,12 @@ function TodayView({ today, updateToday, allData, updatePrev }) {
 }
 
 // ── カレンダー ─────────────────────────────────────────────────────────────
-function CalendarView({ allData }) {
+function CalendarView({ allData, updateDay }) {
   const now = new Date();
   const [yr, setYr] = useState(now.getFullYear());
   const [mo, setMo] = useState(now.getMonth());
   const [sel, setSel] = useState(null);
+  const [editDay, setEditDay] = useState(null);
 
   const first = new Date(yr, mo, 1).getDay();
   const dim   = new Date(yr, mo+1, 0).getDate();
@@ -448,6 +516,21 @@ function CalendarView({ allData }) {
   const prev = () => { if(mo===0){setYr(y=>y-1);setMo(11);}else setMo(m=>m-1); };
   const next = () => { if(mo===11){setYr(y=>y+1);setMo(0);}else setMo(m=>m+1); };
   const selDay = sel ? days.find(d => d.key===sel) : null;
+
+  useEffect(() => {
+    if (selDay) {
+      setEditDay({...EMPTY, ...selDay.data});
+    } else {
+      setEditDay(null);
+    }
+  }, [selDay]);
+
+  const saveSelectedDay = async () => {
+    if (!sel) return;
+    const nextDay = {...editDay};
+    if (!nextDay.sleepH && !nextDay.sleepM) nextDay.sleepManual = false;
+    if (typeof updateDay === "function") await updateDay(sel, nextDay);
+  };
 
   return (
     <div style={{padding:"24px 16px 100px", maxWidth:480, margin:"0 auto"}}>
@@ -468,7 +551,7 @@ function CalendarView({ allData }) {
       <div style={{display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:4}}>
         {Array.from({length:first}, (_,i) => <div key={`e${i}`}/>)}
         {days.map(({d, key, sc}) => {
-          const isToday = key===TODAY, isSel = key===sel;
+          const isToday = key===getTodayKey(), isSel = key===sel;
           return (
             <div key={d} onClick={() => setSel(isSel?null:key)}
               style={{aspectRatio:"1", borderRadius:10,
@@ -519,6 +602,8 @@ function CalendarView({ allData }) {
                 {label:"睡眠",val:fmtMins(sleepMins(selDay.data))},
                 {label:"水シャワー",val:selDay.data.coldShower?"✓":"✗",ok:selDay.data.coldShower},
                 {label:"ポルノなし",val:selDay.data.noPorn?"✓":"✗",ok:selDay.data.noPorn},
+                {label:"ジャーナリング",val:selDay.data.journaling?"✓":"✗",ok:selDay.data.journaling},
+                {label:"読書・勉強",val:selDay.data.readingStudy?"✓":"✗",ok:selDay.data.readingStudy},
                 {label:"朝活",val:selDay.data.morningText||"―"},
                 {label:"スマホ",val:fmtMins(phoneMins(selDay.data))},
               ].map(({label,val,ok}) => (
@@ -529,6 +614,107 @@ function CalendarView({ allData }) {
               ))}
             </div>
           ) : <p style={{color:MU, fontSize:13, margin:0}}>データなし</p>}
+          {editDay && (
+            <div style={{marginTop:16, display:"flex", flexDirection:"column", gap:12}}>
+              <SectionLabel>編集</SectionLabel>
+              <Card>
+                <div style={{display:"flex", flexDirection:"column", gap:12}}>
+                  <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                    <div style={{display:"flex", alignItems:"center", gap:12}}>
+                      <IconBox active={!!editDay.wakeTime}><Sun size={18} color={editDay.wakeTime?A:MU}/></IconBox>
+                      <div>
+                        <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>起床時間</p>
+                        <p style={{fontSize:11, color:MU, margin:0}}>その日の起床時間</p>
+                      </div>
+                    </div>
+                    <input type="time" value={editDay.wakeTime || ""}
+                      onChange={e => setEditDay({...editDay, wakeTime:e.target.value})}
+                      style={{...inp, fontWeight:700, fontSize:15}}/>
+                  </div>
+
+                  <div style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                    <div style={{display:"flex", alignItems:"center", gap:12}}>
+                      <IconBox active={!!editDay.bedTime}><Clock size={18} color={editDay.bedTime?A:MU}/></IconBox>
+                      <div>
+                        <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>就寝時間</p>
+                        <p style={{fontSize:11, color:MU, margin:0}}>前日の夜に寝た時間</p>
+                      </div>
+                    </div>
+                    <input type="time" value={editDay.bedTime || ""}
+                      onChange={e => setEditDay({...editDay, bedTime:e.target.value})}
+                      style={{...inp, fontWeight:700, fontSize:15}}/>
+                  </div>
+
+                  <div>
+                    <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>睡眠時間（手動）</p>
+                    <div style={{display:"flex", gap:8, marginTop:8, alignItems:"center"}}>
+                      <input type="number" placeholder="h" min="0" max="24"
+                        value={editDay.sleepH || ""}
+                        onChange={e => setEditDay({...editDay, sleepH:e.target.value, sleepManual:true})}
+                        style={{...inp, width:80, textAlign:"center"}}/>
+                      <span style={{color:MU}}>時間</span>
+                      <input type="number" placeholder="m" min="0" max="59"
+                        value={editDay.sleepM || ""}
+                        onChange={e => setEditDay({...editDay, sleepM:e.target.value, sleepManual:true})}
+                        style={{...inp, width:80, textAlign:"center"}}/>
+                      <span style={{color:MU}}>分</span>
+                    </div>
+                  </div>
+
+                  <CheckRow icon={<Droplets size={18} color={editDay.coldShower?A:MU}/>} 
+                    label="水シャワー" sub="冷水で浴びた"
+                    checked={!!editDay.coldShower}
+                    onToggle={() => setEditDay({...editDay, coldShower:!editDay.coldShower})}/>
+
+                  <CheckRow icon={<Shield size={18} color={editDay.noPorn?A:MU}/>} 
+                    label="No Porn" sub="前日の自制"
+                    checked={!!editDay.noPorn}
+                    onToggle={() => setEditDay({...editDay, noPorn:!editDay.noPorn})}/>
+
+                  <CheckRow icon={<Shield size={18} color={editDay.noBathPhone?A:MU}/>} 
+                    label="風呂トイレスマホ禁止" sub="前日のお風呂/トイレでスマホ不要"
+                    checked={!!editDay.noBathPhone}
+                    onToggle={() => setEditDay({...editDay, noBathPhone:!editDay.noBathPhone})}/>
+
+                  <div>
+                    <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>朝活</p>
+                    <input type="text" placeholder="例：読書、ジム、瞑想..."
+                      value={editDay.morningText || ""}
+                      onChange={e => setEditDay({...editDay, morningText:e.target.value})}
+                      style={{...inp, width:"100%", marginTop:8}}/>
+                    <div style={{display:"flex", alignItems:"center", gap:8, marginTop:8}}>
+                      <input type="number" placeholder="30" min="0"
+                        value={editDay.morningMin || ""}
+                        onChange={e => setEditDay({...editDay, morningMin:e.target.value})}
+                        style={{...inp, width:70}}/>
+                      <span style={{fontSize:12, color:MU}}>分</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p style={{fontSize:14, fontWeight:600, color:TX, margin:0}}>スクリーンタイム</p>
+                    <div style={{display:"flex", alignItems:"center", gap:8, marginTop:8}}>
+                      <input type="number" placeholder="h" min="0" max="24"
+                        value={editDay.phoneH || ""}
+                        onChange={e => setEditDay({...editDay, phoneH:e.target.value})}
+                        style={{...inp, width:80, textAlign:"center"}}/>
+                      <span style={{color:MU}}>h</span>
+                      <input type="number" placeholder="m" min="0" max="59"
+                        value={editDay.phoneM || ""}
+                        onChange={e => setEditDay({...editDay, phoneM:e.target.value})}
+                        style={{...inp, width:80, textAlign:"center"}}/>
+                      <span style={{color:MU}}>m</span>
+                    </div>
+                  </div>
+
+                  <button onClick={saveSelectedDay}
+                    style={{...navBtnStyle, width:"100%", justifyContent:"center"}}>
+                    保存する
+                  </button>
+                </div>
+              </Card>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -774,6 +960,7 @@ function Nav({ view, setView }) {
 function HabitTracker() {
   const [view,     setView]     = useState("today");
   const [allData,  setAllData]  = useState({});
+  const [todayKey, setTodayKey] = useState(getTodayKey());
   const [today,    setToday]    = useState({...EMPTY});
   const [loading,  setLoading]  = useState(true);
   const allRef = useRef({});
@@ -790,13 +977,26 @@ function HabitTracker() {
       try {
         const r = await storage.get("habit-v1");
         const data = JSON.parse(r.value);
+        const key = getTodayKey();
         allRef.current = data;
         setAllData(data);
-        setToday(data[TODAY] ? {...EMPTY, ...data[TODAY]} : {...EMPTY});
+        setToday(data[key] ? {...EMPTY, ...data[key]} : {...EMPTY});
+        setTodayKey(key);
       } catch(_) { /* 初回 */ }
       setLoading(false);
     })();
   }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const key = getTodayKey();
+      if (key !== todayKey) {
+        setTodayKey(key);
+        setToday(allRef.current[key] ? {...EMPTY, ...allRef.current[key]} : {...EMPTY});
+      }
+    }, 60000);
+    return () => clearInterval(timer);
+  }, [todayKey]);
 
   const updateToday = useCallback(async (newDay) => {
     setToday(newDay);
@@ -809,7 +1009,7 @@ function HabitTracker() {
       const b = parse(newDay.bedTime);
       const w = parse(newDay.wakeTime);
       if (b !== null && w !== null && b >= w) {
-        const prevKey = getPrevDateKey(TODAY);
+        const prevKey = getPrevDateKey(todayKey);
         const prevRec = {...(newAllBase[prevKey] || {})};
         // 移動: 就寝時刻と手動睡眠値を前日へ保存
         prevRec.bedTime = newDay.bedTime;
@@ -824,15 +1024,22 @@ function HabitTracker() {
       }
     } catch(e) { /* ignore parsing errors */ }
 
-    const newAll = {...newAllBase, [TODAY]: dayToSave};
+    const newAll = {...newAllBase, [todayKey]: dayToSave};
     allRef.current = newAll;
     setAllData(newAll);
     try { await storage.set("habit-v1", JSON.stringify(newAll)); } catch(_) {}
-  }, []);
+  }, [todayKey]);
 
   const updatePrev = useCallback(async (newPrev) => {
-    const prevKey = getPrevDateKey(TODAY);
+    const prevKey = getPrevDateKey(todayKey);
     const newAll = {...allRef.current, [prevKey]: newPrev};
+    allRef.current = newAll;
+    setAllData(newAll);
+    try { await storage.set("habit-v1", JSON.stringify(newAll)); } catch(_) {}
+  }, [todayKey]);
+
+  const updateDay = useCallback(async (key, newDay) => {
+    const newAll = {...allRef.current, [key]: newDay};
     allRef.current = newAll;
     setAllData(newAll);
     try { await storage.set("habit-v1", JSON.stringify(newAll)); } catch(_) {}
@@ -848,8 +1055,8 @@ function HabitTracker() {
   return (
     <div style={{background:BG, minHeight:"100vh", color:TX,
       fontFamily:"'Syne', system-ui, sans-serif", overflowX:"hidden"}}>
-      {view==="today"    && <TodayView    today={today} updateToday={updateToday} allData={allData} updatePrev={updatePrev}/>}
-      {view==="calendar" && <CalendarView allData={allData}/>}
+      {view==="today"    && <TodayView    today={today} todayKey={todayKey} updateToday={updateToday} allData={allData} updatePrev={updatePrev}/>}
+      {view==="calendar" && <CalendarView allData={allData} updateDay={updateDay}/>}
       {view==="stats"    && <StatsView    allData={allData}/>}
       <Nav view={view} setView={setView}/>
     </div>
